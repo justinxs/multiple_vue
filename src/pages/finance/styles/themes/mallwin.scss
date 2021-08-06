@@ -1,0 +1,4 @@
+@import './theme';
+
+@include setCommonTheme('mallwin');
+@include setTheme('mallwin');

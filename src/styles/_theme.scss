@@ -1,0 +1,124 @@
+@function getMapVal($key, $map) {
+    $val: null;
+    @if map-has-key($map, $key) {
+        $val: map-get($map, $key);
+    } @else {
+        $val: map-get($map, 'default');
+    }
+
+    @return $val;
+};
+
+@function getTheme($name, $themes) {
+    $theme: ();
+    @each $key, $map in $themes {
+        $theme: map-merge($theme, ($key: getMapVal($name, $map)));
+    }
+    @return $theme;
+};
+
+@mixin setBlock($block) {
+    @each $name, $val in $block {
+        #{$name}: $val
+    }
+};
+
+
+
+/**
+ * 按照 keys 顺序传值生成主题项
+ * 若传值长度小于 keys 主题的数量，则取第一个值作为默认值
+ */
+
+@function createThemeItem($items...) {
+    $themeList: 'cclive' 'mallwin' 'maxlive' 'morewin' 'default';
+    $themeCount: length($themeList);
+    $themeMap: ();
+    $len: length($items);
+    @for $i from 1 through $themeCount {
+        $name: nth($themeList, $i);
+        @if $len >= $i {
+            $themeMap: map-merge($themeMap, ($name: nth($items, $i)));
+        } @else {
+            $themeMap: map-merge($themeMap, ($name: nth($items, 1)));
+        }
+    };
+
+    @return $themeMap;
+};
+
+
+/**
+ * 主题配置map
+ * 注：新增一个主题scss文件（不以 _ 开头的scss）需要重新 npm run start
+ */
+
+@mixin setCommonTheme($name) {
+    $themeMap: (
+        primary-color: createThemeItem(#1890ff, #f5222d, #fa541c, #faad14, #52c41a),
+        success-color: createThemeItem(#67C23A),
+        warning-color: createThemeItem(#E6A23C),
+        danger-color: createThemeItem(#F56C6C),
+        info-color: createThemeItem(#909399),
+        primary-font-c: createThemeItem(#303133, #303133, #fff, #fff, #303133),
+        regular-font-c: createThemeItem(#606266),
+        secondary-font-c: createThemeItem(#909399),
+        placeholder-font-c: createThemeItem(#C0C4CC),
+        base-border-c: createThemeItem(#DCDFE6),
+        light-border-c: createThemeItem(#E4E7ED),
+        lighter-border-c: createThemeItem(#EBEEF5),
+        extra-light-border-c: createThemeItem(#F2F6FC),
+        base-bg: createThemeItem(black, black, pink, #13c2c2, #fff),
+        logo-block: createThemeItem(
+            (background: url("~@/images/logo/cclive.png") no-repeat center, background-size: 100% 100%),
+            (background: url("~@/images/logo/mallwin.png") no-repeat center, background-size: 100% 100%),
+            (background: url("~@/images/logo/maxlive.png") no-repeat center, background-size: 100% 100%),
+            (background: url("~@/images/logo/morewin.png") no-repeat center, background-size: 100% 100%)
+        )
+    );
+    
+    /**
+     * 顶部公共变量，block 后缀定义的是 css属性集合，数据类型是一个 map
+     * 对于主题皮肤来说，一般公共变量是 颜色值 或者 主题背景图，尽量减少与主题无关的其他变量
+    */
+    $theme: getTheme($name, $themeMap);
+
+    $primary-color: getMapVal('primary-color', $theme);
+    $success-color: getMapVal('success-color', $theme);
+    $warning-color: getMapVal('warning-color', $theme);
+    $danger-color: getMapVal('danger-color', $theme);
+    $info-color: getMapVal('info-color', $theme);
+
+    $primary-font-c: getMapVal('primary-font-c', $theme);
+    $regular-font-c: getMapVal('regular-font-c', $theme);
+    $secondary-font-c: getMapVal('secondary-font-c', $theme);
+    $placeholder-font-c: getMapVal('placeholder-font-c', $theme);
+
+    $base-border-c: getMapVal('base-border-c', $theme);
+    $light-border-c: getMapVal('light-border-c', $theme);
+    $lighter-border-c: getMapVal('lighter-border-c', $theme);
+    $extra-light-border-c: getMapVal('extra-light-border-c', $theme);
+
+    $base-bg: getMapVal('base-bg', $theme);
+    $logo-block: getMapVal('logo-block', $theme);
+
+    /**
+     * 公共 主题class
+     * 主题类名规则：
+     * 1、包含主要公共模块类名：如：body container footer slide 等等
+     * 2、类名的原子性，如：（模块-<等级>-属性简写）module-bg module-deep-bg module-fc module-primary-fc module-block
+     * ......
+    */
+
+    body {
+        color: $primary-font-c;
+        background-color: $base-bg;
+    }
+    
+    .app-header {
+        background-color: $primary-color;
+        .logo {
+            @include setBlock($logo-block);
+        }
+    }
+}

@@ -1,0 +1,14 @@
+//************************************************************
+//    @除以2函数
+//************************************************************/
+@function pxChangeRem($parameter) {
+	@return ($parameter/75) * 1rem;
+}
+
+@function pxChangeRem2($parameter) {
+	@return ($parameter/64) * 1rem;
+}
+
+@function pxChangeRem1080($parameter) {
+	@return ($parameter/108) * 1rem;
+}

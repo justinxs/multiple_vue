@@ -1,0 +1,4 @@
+@import './theme';
+
+@include setCommonTheme('maxlive');
+@include setTheme('maxlive');

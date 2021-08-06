@@ -1,0 +1,22 @@
+{
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"useBuiltIns": "usage",
+				"corejs": "3.13.1",
+				"targets": {
+					"android": 9
+				}
+			}
+		]
+	],
+	"plugins": [
+        "@babel/syntax-dynamic-import",
+        ["import", {
+            "libraryName": "vant",
+            "libraryDirectory": "es",
+            "style": true
+        }]
+    ]
+}

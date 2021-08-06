@@ -1,0 +1,28 @@
+@mixin setRemScreen() {
+    $min-width: 320px 360px 375px 384px 400px 412px 414px 480px 768px 1024px;
+    $font-size: 37.5px;
+    $fontSreen: $font-size/375px;
+    
+    html {
+        font-size: $font-size;
+    }
+    /*屏幕适配*/
+    @each $w in $min-width {
+        @media only screen and (min-width: $w) {
+            html {
+                font-size: $fontSreen * $w !important;
+            }
+        }
+    }
+    // 适配ipad
+    @media only screen and (min-width:768px) {
+        html {
+            font-size: 48px !important;
+        }
+    }
+    @media only screen and (min-width:1024px) {
+        html {
+            font-size: 48px !important;
+        }
+    }
+}
