@@ -23,7 +23,8 @@ const commonlibs = [
     {type: 'js', path: 'lib/vue-router.min.js'},
     {type: 'js', path: 'lib/vuescroll-native.min.js'},
     {type: 'js', path: 'lib/xxtea.min.js'},
-    {type: 'js', path: 'lib/axios.min.js'}
+    {type: 'js', path: 'lib/axios.min.js'},
+    {type: 'js', path: 'lib/md5.min.js'}
 ]
 const libsMap = {
     member: [],

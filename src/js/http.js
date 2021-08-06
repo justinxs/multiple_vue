@@ -1,5 +1,6 @@
-import qs from 'qs';
+import axios from 'axios'
 import md5 from 'md5'
+import {stringify} from './helper'
 
 const instance = axios.create({
 	timeout: 30000,
@@ -73,7 +74,7 @@ const httpRequest = {
 				if(header) {
 					Object.assign(header, headers);
 				}
-				return qs.stringify(data);
+				return stringify(data);
 			}]
 		})
 	}

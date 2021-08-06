@@ -3,8 +3,8 @@ const themesMap = {
     mallwin: '3000',
     maxlive: '4000'
 }
-const STATICTHEME = process.env.THEME || 'mallwin'
-const STATICSERVICEID = themesMap[STATICTHEME] || '3000'
+const STATIC_THEME = process.env.THEME || 'mallwin'
+const STATIC_SERVICE_ID = themesMap[STATIC_THEME] || '3000'
 const fromId = serviceId => {
     return Object.keys(themesMap).filter(t => themesMap[t] == serviceId)[0]
 }
@@ -31,7 +31,7 @@ const changeTheme = ({moduleName, theme, serviceId, resolve, reject}) => {
 
     theme = serviceId ? fromId(serviceId) : theme
     if (theme && window.THEME !== theme) {
-        if(STATICTHEME === theme) {
+        if(STATIC_THEME === theme) {
             link && link.parentNode.removeChild(link)
             resolve && resolve({theme, interval: Date.now() - startTime})
         } else {
@@ -50,15 +50,15 @@ const changeTheme = ({moduleName, theme, serviceId, resolve, reject}) => {
 
         window.THEME = theme
         if (serviceId) {
-            window.SERVICEID = serviceId
+            window.SERVICE_ID = serviceId
         }
     }
 }
 
 
 export {
-    STATICSERVICEID,
-    STATICTHEME,
+    STATIC_SERVICE_ID,
+    STATIC_THEME,
     themesMap,
     fromId,
     fromTheme,

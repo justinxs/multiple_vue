@@ -42,6 +42,10 @@ module.exports = {
 	resolve: {
 		alias: {
             'vue$': path.resolve(__dirname, '../src/browser/vue'),
+            'vuex$': path.resolve(__dirname, '../src/browser/vuex'),
+            'vue-router$': path.resolve(__dirname, '../src/browser/vue-router'),
+            'axios$': path.resolve(__dirname, '../src/browser/axios'),
+            'md5$': path.resolve(__dirname, '../src/browser/md5'),
             '@': path.resolve(__dirname, '../src'),
             '@pages': path.resolve(__dirname, '../src/pages')
         },

@@ -1,8 +1,9 @@
 import './styles/base.scss'
 import './js/date';
-import {STATICSERVICEID, STATICTHEME, changeTheme} from './theme';
+import Vue from 'vue'
+import {STATIC_SERVICE_ID, STATIC_THEME, changeTheme} from './theme';
 import {getLocalLang} from './local';
-import {getQueryString} from './js/helper'
+import {getQueryString, uuid} from './js/helper'
 import hybird from './js/hybird'
 import App from './app.vue'
 import { Toast } from 'vant'
@@ -21,18 +22,19 @@ function createApp(store, router) {
     })
 
     /**
-     * STATICTHEME          指定主题打包得到的默认 theme
-     * STATICSERVICEID      由指定主题打包得到的默认 serviceId
-     * THEME                当前 theme
-     * SERVICEID            当前 serviceId
-     * ?serviceId=3000      由url参数方式重置 serviceId，若url存在 serviceId 则 theme 由其映射得到，无法通过url再修改 theme
-     * ?theme=mallwin       由url参数方式重置 theme，若url中不存在 serviceId，则使用默认 serviceId，主题切换不影响 serviceId
+     * STATIC_THEME           指定主题打包得到的默认 theme
+     * STATIC_SERVICE_ID      由指定主题打包得到的默认 serviceId
+     * THEME                  当前 theme
+     * SERVICE_ID             当前 serviceId
+     * ?serviceId=3000        由url参数方式重置 serviceId，若url存在 serviceId 则 theme 由其映射得到，无法通过url再修改 theme
+     * ?theme=mallwin         由url参数方式重置 theme，若url中不存在 serviceId，则使用默认 serviceId，主题切换不影响 serviceId
      * 
      */
 
-    window.STATICTHEME = window.THEME = STATICTHEME
-    window.STATICSERVICEID = window.SERVICEID = STATICSERVICEID
-    window.LANGCODE = getQueryString('langCode') || 'zh-CN'
+    window.UUID = uuid()
+    window.STATIC_THEME = window.THEME = STATIC_THEME
+    window.STATIC_SERVICE_ID = window.SERVICE_ID = STATIC_SERVICE_ID
+    window.LANG_CODE = getQueryString('langCode') || 'zh-CN'
 
     if (q_serviceId) {
         app.$store.dispatch('changeServiceId', q_serviceId);
@@ -41,11 +43,11 @@ function createApp(store, router) {
             moduleName: app.$store.state.moduleName,
             theme: q_theme
         })
-        app.$store.commit('setServiceId', window.SERVICEID);
+        app.$store.commit('setServiceId', window.SERVICE_ID);
     }
-    app.$store.commit('setLang', getLocalLang(window.LANGCODE));
+    app.$store.commit('setLang', getLocalLang(window.LANG_CODE));
     hybird.on('langCode', data => {
-        window.LANGCODE = data.langCode
+        window.LANG_CODE = data.langCode
         app.$store.commit('setLang', getLocalLang(data.langCode));
     })
 

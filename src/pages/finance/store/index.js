@@ -1,13 +1,15 @@
-// store.js
-import {changeTheme} from '@/theme';
-import {setLocalLang} from '@/local';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import {changeTheme} from '@/theme'
+import {setLocalLang} from '@/local'
+import http from '@/js/http'
 
+Vue.use(Vuex)
 export default new Vuex.Store({
     devtools: process.env.NODE_ENV === 'development',
     state: {
         moduleName: 'finance',
         serviceId: '',
-        globalConfig: {},
         langCode: 'zh-CN',
         lang: {},
         langCategory: [],

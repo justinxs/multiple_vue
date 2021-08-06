@@ -204,6 +204,24 @@ export function isPrinme(num) {
  * 获取字符串中下标为素数/质数的字符集合
  * @param {String} str
  */
- export function prinme(str) {
+export function prinme(str) {
     return str ? str.split('').filter((v, i) => isPrinme(i)).join('') : ''
+}
+
+export function getDataType(data) {
+    const strType = Object.prototype.toString.call(data);
+    const matches = /^\[\S+ (\S+)\]$/.exec(strType);
+    return matches ? (matches[1] === 'Number' && isNaN(data) ? 'NaN' : matches[1]) : strType
+}
+
+// application/x-www-form-urlencoded 参数格式化
+export function stringify(data) {
+    let result = ''
+    let type = getDataType(data)
+    if (type === 'Array' || type === 'Object') {
+        result = Object.keys(data)
+            .reduce((res, k, i) => res += `${i > 0 ? '&' : ''}${k}=${data[k]}`, '')
+    }
+    
+    return result
 }

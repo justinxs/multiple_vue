@@ -31,8 +31,6 @@
 		"koa-router": "^10.0.0",
 		"koa2-connect": "^1.0.2",
 		"log4js": "^6.3.0",
-		"md5": "^2.3.0",
-		"qs": "^6.10.1",
 		"vant": "^2.12.25"
 	},
 	"devDependencies": {
