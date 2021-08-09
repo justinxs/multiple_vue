@@ -19,6 +19,7 @@
 		<meta name="browsermode" content="application">
 		<meta name="x5-page-mode" content="default">
         <meta name="resource-version" content="<%= Date.now() %>">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😂</text></svg>">
         <%for (var i = 0; i < libs.length; i++) { %>
         <% if (libs[i].type === 'css') { %><link rel="stylesheet" href="<%= libs[i].path %>">
         <%} else { %><script defer src="<%= libs[i].path %>"></script><% } %><% } %>
