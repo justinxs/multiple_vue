@@ -3,5 +3,4 @@ node_modules
 logs/*
 *.orig
 .idea/
-dist/
 *.log
