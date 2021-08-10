@@ -1,9 +1,9 @@
 const fs = require('fs')
 const { exec } = require('child_process')
-const NEW_COMMIT = '5ec0a9'
-const OLD_COMMIT = 'a6820f'
+const NEW_COMMIT = 'e892334'
+const OLD_COMMIT = 'fc43d50'
 
-exec(`git diff --name-status ${NEW_COMMIT} ${OLD_COMMIT} dist`, (error, stdout, stderr) => {
+exec(`git diff --name-status ${OLD_COMMIT} ${NEW_COMMIT} dist`, (error, stdout, stderr) => {
     if (error) {
         console.error(`exec error: ${error}`);
         return;
