@@ -1,7 +1,7 @@
-const path = require('path');
-const webpackMerge = require('webpack-merge');
+const path = require('path')
+const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.config')
-const {getPagesEntry} = require('./filePath.js');
+const {getPagesEntry} = require('./filePath.js')
 const getRules = require('./rules')
 const getPlugins = require('./plugins')
 
